@@ -1,6 +1,12 @@
-body,
+body {
+  font-family: "Lato", sans-serif;
+
+  padding: 10px 20px;
+}
+
 button {
   font-family: "Lato", sans-serif;
+  margin-top: 15px;
 }
 
 input {
@@ -23,6 +29,10 @@ input {
   border-radius: 5px;
   border: 1px solid rgb(170, 170, 170);
   padding: 10px;
+}
+
+.modalBtn {
+  color: rgb(45, 158, 250);
 }
 
 /* modal from w3schools */
@@ -63,7 +73,7 @@ input {
   text-decoration: none;
   cursor: pointer;
 }
-/* also from w3schools */
+/* table style from w3schools */
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

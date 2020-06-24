@@ -25,13 +25,13 @@
     </div>
     {% endfor %} {% endif %} {% endwith %}
     <!--  -->
-    <button id="modalBtn">Currency Abbreviations</button>
+    
     <!--  -->
     <form action="/convert">
-      <label for="inMoney">From:</label>
+      <label for="inMoney">From: <sup class="modalBtn">&#128712</sup> </label>
       <input type="text" id="inMoney" name="inMoney" placeholder="ex. USD" />
       <br />
-      <label for="outMoney">To:</label>
+      <label for="outMoney">To: <sup class="modalBtn">&#128712</sup></label>
       <input type="text" id="outMoney" name="outMoney" placeholder="ex. JPY" />
       <br />
       <label for="amount">Amount:</label>
