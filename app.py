@@ -49,10 +49,10 @@ def invalid_inputs(in_curr, out_curr, amt):
 
     if in_curr not in currency_abv:
         errs=True
-        flash(f"'From:'{in_curr} not valid currency abbreviation", "error")
+        flash(f"{in_curr} not valid currency abbreviation", "error")
 
     if out_curr not in currency_abv:
         errs=True
-        flash(f"'To:'{out_curr} not valid currency abbreviation", "error")
+        flash(f"{out_curr} not valid currency abbreviation", "error")
 
     return errs

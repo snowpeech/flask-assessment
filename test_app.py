@@ -1,6 +1,6 @@
 from app import app, invalid_inputs
 from unittest import TestCase
-# from forex_python.converter import CurrencyRates, CurrencyCodes
+from forex_python.converter import CurrencyRates, CurrencyCodes
 
 app.config['TESTING']=True
 app.config['DEBUG_TB_INTERCEPT_HOSTS']=['dont-show-debug-toolbar']
@@ -19,21 +19,14 @@ class ForexTestCase(TestCase):
     def test_forex(self):
         """ test forex functions are correct"""
         with app.test_client() as client:
-            resp = client.get('/')
+            resp = client.get('/convert', query_string={"inMoney":"USD", "outMoney":"usd", "amount":"1"})
+            self.assertIn(b'1.0', resp.data)
         
-        # self.assertEqual(CurrencyRates.convert('USD','USD',1),1)
-            self.assertEqual(c.get_symbol( 'USD'),"US$")
+    def test_invalid_inputs(self):
+        """ Ensure invalid inputs properly flags bad input"""
+        with app.test_client() as client: 
+            resp = client.get('/convert', query_string={"inMoney":"USC", "outMoney":"JPx", "amount":"1@"})
 
-    # def test_invalid_inputs(self):
-    #     """ Ensure invalid inputs properly flags bad input"""
-    #     self.assertFalse(invalid_inputs("usd", "USD",10.0 ))
-    #     self.assertFalse(invalid_inputs("usd", "USD","10" )) #no errors
-        # self.assertTrue(invalid_inputs("USD!", "USD",10 ))
-        # self.assertTrue(invalid_inputs("USD", "USA",10 ))
-        # self.assertTrue(invalid_inputs("USD", "",10 ))
-
-        # self.assertTrue(invalid_inputs("USD", "USD","0a" ))
-        # self.assertTrue(invalid_inputs("USD", "USD","0!" ))
-    
-
-    # test routes for success and fail
+            self.assertIn(b'USC not valid currency abbreviation', resp.data)
+            self.assertIn(b'JPX not valid currency abbreviation', resp.data)
+            self.assertIn(b'Amount input contained invalid character', resp.data)   
